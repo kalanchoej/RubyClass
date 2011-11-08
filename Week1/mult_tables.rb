@@ -2,11 +2,8 @@
 
 def row(factor1, factor2, length)
   row = ''
-  i = 1
-  while i <= factor2
-    row << format("%#{length}d ", (i * factor1).to_s)
-    i += 1
-  end
+  i = 0
+  row << format("%#{length}d ", ((i+=1) * factor1).to_s) until i == factor2
   row
 end
 
@@ -17,11 +14,7 @@ end
 def decorate(integer)
   decoration = ''
   width = ((cell_width(integer) + 1) * integer)
-  i = 0
-  while i < width
-    decoration << "="
-    i += 1
-  end
+  width.times { decoration << "=" }
   decoration
 end
 
@@ -34,20 +27,13 @@ end
 def multiplication_table(integer, heading = true, decorate = false)
   i = 1
   table = ''
-  if (heading == true) 
+  if (heading) 
     heading = "Multiplication Table to " + integer.to_s
     table << format_heading(heading, integer) + "\n"
   end
-  if (decorate == true)
-    table << decorate(integer) + "\n"
-  end
-  while i <= integer
-    table << row(i, integer, cell_width(integer)) + "\n"
-    i += 1
-  end
-  if (decorate == true)
-    table << decorate(integer) + "\n"
-  end
+  if (decorate) then table << decorate(integer) + "\n" end    
+  integer.times { |i| table << row(i+1, integer, cell_width(integer)) + "\n" }
+  if (decorate) then table << decorate(integer) + "\n" end
   table
 end
 
