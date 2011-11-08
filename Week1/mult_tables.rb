@@ -27,13 +27,13 @@ end
 def multiplication_table(integer, heading = true, decorate = false)
   i = 1
   table = ''
-  if (heading) 
+  if heading
     heading = "Multiplication Table to " + integer.to_s
     table << format_heading(heading, integer) + "\n"
   end
-  if (decorate) then table << decorate(integer) + "\n" end    
+  if decorate then table << decorate(integer) + "\n" end
   integer.times { |i| table << row(i+1, integer, cell_width(integer)) + "\n" }
-  if (decorate) then table << decorate(integer) + "\n" end
+  if decorate then table << decorate(integer) + "\n" end
   table
 end
 
